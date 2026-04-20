@@ -10,3 +10,7 @@ bcrypt
 python-jose[cryptography]
 reportlab
 email-validator
+# --- ADD THESE ---
+transformers
+torch
+sentencepiece
