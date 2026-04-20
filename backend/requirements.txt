@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+httpx
+python-dotenv
+ollama
+pydantic
+pymongo
+motor
+bcrypt
+python-jose[cryptography]
+reportlab
+email-validator
