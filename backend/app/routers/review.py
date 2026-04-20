@@ -4,8 +4,7 @@ from bson import ObjectId
 from app.models.schemas import ReviewRequest, ReviewResponse, ReviewHistoryItem
 from app.auth import get_current_user
 from app.database import get_db
-from app.services import github_service, llm_service_custom_model
-
+from app.services import github_service, llm_service
 router = APIRouter(prefix="/api", tags=["review"])
 
 
