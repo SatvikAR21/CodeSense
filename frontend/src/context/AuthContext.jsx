@@ -33,14 +33,15 @@ export function AuthProvider({ children }) {
   }
 
   async function authFetch(url, options = {}) {
-    return fetch(url, {
-      ...options,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        ...(options.headers || {}),
-      },
-    });
+  const base = import.meta.env.VITE_API_URL || "";
+  return fetch(`${base}${url}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      ...(options.headers || {}),
+    },
+  });
   }
 
   return (

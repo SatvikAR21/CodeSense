@@ -24,6 +24,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:3000",
+        "https://code-sense-iota.vercel.app",             # Your Production URL
+        "https://code-sense-iota-*.vercel.app",          # Your Preview Wildcard
     ],
     allow_credentials=True,
     allow_methods=["*"],

@@ -20,8 +20,8 @@ export default function Signup() {
     }
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
+const base = import.meta.env.VITE_API_URL || "";
+const res = await fetch(`${base}/api/auth/login`, {        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
