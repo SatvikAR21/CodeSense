@@ -21,7 +21,7 @@ export default function Signup() {
     setLoading(true);
     try {
 const base = import.meta.env.VITE_API_URL || "";
-const res = await fetch(`${base}/api/auth/login`, {        method: "POST",
+const res = await fetch(`${base}/api/auth/signup`, {        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
