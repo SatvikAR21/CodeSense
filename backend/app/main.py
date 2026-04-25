@@ -13,9 +13,9 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="ReviewAI — Code Review Assistant",
-    description="AI-powered code review using CodeLlama 13B and GitHub API",
-    version="2.0.0",
+    title="CodeSense — AI Code Review Assistant",
+    description="AI-powered code review using a custom fine-tuned T5 model",
+    version="3.0.0",
     lifespan=lifespan,
 )
 
@@ -24,8 +24,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:3000",
-        "https://code-sense-iota.vercel.app",             # Your Production URL
-        "https://code-sense-iota-*.vercel.app",          # Your Preview Wildcard
+        "https://code-sense-iota.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -40,6 +39,7 @@ app.include_router(pdf.router)
 @app.get("/")
 async def root():
     return {
-        "message": "ReviewAI v2 backend is running",
-        "docs": "http://localhost:8000/docs",
+        "message": "CodeSense backend is running",
+        "docs":    "https://codesense-backend-uls6.onrender.com/docs",
+        "health":  "https://codesense-backend-uls6.onrender.com/api/health",
     }

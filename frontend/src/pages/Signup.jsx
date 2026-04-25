@@ -20,15 +20,16 @@ export default function Signup() {
     }
     setLoading(true);
     try {
-const base = import.meta.env.VITE_API_URL || "";
-const res = await fetch(`${base}/api/auth/signup`, {        method: "POST",
+      const base = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${base}/api/auth/register`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || "Registration failed");
       login(data.access_token, data.user);
-      navigate("/");
+      navigate("/app");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -47,7 +48,7 @@ const res = await fetch(`${base}/api/auth/signup`, {        method: "POST",
               <path d="M13 12l.8.8 1.6-1.6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <span className="logo-text">ReviewAI</span>
+          <span className="logo-text">CodeSense</span>
         </div>
 
         <h1 className="auth-title">Create your account</h1>
