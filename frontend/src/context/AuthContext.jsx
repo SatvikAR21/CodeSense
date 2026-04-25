@@ -8,9 +8,10 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Restore session from localStorage on page load
-    const savedToken = localStorage.getItem("reviewai_token");
-    const savedUser = localStorage.getItem("reviewai_user");
+    // sessionStorage clears automatically when tab/browser is closed
+    // So every new tab or shared link starts completely fresh
+    const savedToken = sessionStorage.getItem("reviewai_token");
+    const savedUser  = sessionStorage.getItem("reviewai_user");
     if (savedToken && savedUser) {
       setToken(savedToken);
       setUser(JSON.parse(savedUser));
@@ -21,27 +22,27 @@ export function AuthProvider({ children }) {
   function login(tokenValue, userData) {
     setToken(tokenValue);
     setUser(userData);
-    localStorage.setItem("reviewai_token", tokenValue);
-    localStorage.setItem("reviewai_user", JSON.stringify(userData));
+    sessionStorage.setItem("reviewai_token", tokenValue);
+    sessionStorage.setItem("reviewai_user", JSON.stringify(userData));
   }
 
   function logout() {
     setToken(null);
     setUser(null);
-    localStorage.removeItem("reviewai_token");
-    localStorage.removeItem("reviewai_user");
+    sessionStorage.removeItem("reviewai_token");
+    sessionStorage.removeItem("reviewai_user");
   }
 
   async function authFetch(url, options = {}) {
-  const base = import.meta.env.VITE_API_URL || "";
-  return fetch(`${base}${url}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-      ...(options.headers || {}),
-    },
-  });
+    const base = import.meta.env.VITE_API_URL || "";
+    return fetch(`${base}${url}`, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        ...(options.headers || {}),
+      },
+    });
   }
 
   return (
