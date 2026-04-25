@@ -42,7 +42,7 @@ async def review_pr(
 
     # Run AI analysis
     try:
-        analysis = await llm_service_custom_model.analyze_code(pr_data["diff"])
+        analysis = await llm_service.analyze_code(pr_data["diff"])
     except RuntimeError as e:
         raise HTTPException(status_code=503, detail=str(e))
     except Exception as e:
